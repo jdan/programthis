@@ -1,4 +1,4 @@
-# ProgramThis
+# Program This
 
 This repository hosts all of my solutions to the challenges posted to [programthis](http://programthis.net). Be sure to check back often for updates.
 
