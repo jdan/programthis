@@ -11,8 +11,8 @@ def main():
             base = ord('A')
         else:
             return_string += char
-            continue    
-    
+            continue
+
         code = ord(char) - base
 
         # add the shift, mod 26 to reduce overflow, then add it back to a
