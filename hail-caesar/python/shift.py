@@ -4,7 +4,7 @@ def main():
 
     return_string = ''
     for char in string:
-        # get the number of characters from 'a' (adjust for the correct case)
+    # get the number of characters from 'a' (adjust for the correct case)
         if char >= 'a' and char <= 'z':
             base = ord('a')
         elif char >= 'A' and char <= 'Z':
