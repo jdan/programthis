@@ -1,3 +1,4 @@
+#!/usr/bin/python
 def main():
     message = raw_input()
     output  = ''

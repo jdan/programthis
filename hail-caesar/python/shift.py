@@ -1,3 +1,4 @@
+#!/usr/bin/python
 def main():
     string = raw_input('Enter a string: ')
     shift  = int(raw_input('How much do you want to shift? '))

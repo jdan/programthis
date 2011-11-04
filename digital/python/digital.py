@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # digital.py
 # Jordan Scales 
 # http://programthis.net

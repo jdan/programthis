@@ -1,3 +1,4 @@
+#!/usr/bin/python
 def main():
     my_in = raw_input()
     my_out = ''

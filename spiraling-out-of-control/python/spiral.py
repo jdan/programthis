@@ -1,3 +1,4 @@
+#!/usr/bin/python
 def main():
     length = int(raw_input('Enter an odd side length: '))
     while length % 2 == 0:

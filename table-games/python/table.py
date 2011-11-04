@@ -1,3 +1,4 @@
+#!/usr/bin/python
 def main():
     my_input = raw_input("Enter some words, separated by spaces: ")
     a = my_input.split()
