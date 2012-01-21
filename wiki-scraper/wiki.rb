@@ -1,5 +1,15 @@
 #!/usr/bin/env ruby
 
+# wiki-scraper.rb by Jordan Scales
+# http://jordanscales.com
+# http://programthis.net
+#
+# Tests the idea that the first link on each wikipedia article
+#   will eventually lead to philosophy
+#
+# Usage:
+#   ruby wiki-scraper.rb daft punk
+
 require 'nokogiri'
 require 'open-uri'
 require 'cgi'
