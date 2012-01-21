@@ -21,7 +21,6 @@ def search_url(query)
 end
 
 def title_from_url(url)
-  
   doc = Nokogiri::HTML(open(url))
   doc.css('h1#firstHeading').first.content
 end
@@ -54,7 +53,6 @@ def first_link(url)
         parenth += 1
       end
     end
-    
   end
 end
 
