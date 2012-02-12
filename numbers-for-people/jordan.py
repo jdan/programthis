@@ -6,7 +6,7 @@ def number_to_human(n):
                'quadrillion', 'quintillion', 'sextillion', 
                'septillion', 'octillion', 'nonillion', 'decillion']
                
-    tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty',
+    tens = ['', '', 'twenty', 'thirty', 'fourty', 'fifty', 'sixty',
             'seventy', 'eighty', 'ninety']
 
     teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 
