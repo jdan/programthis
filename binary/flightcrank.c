@@ -5,6 +5,8 @@
 
 #include <stdio.h>
 
+#define MAX 51
+
 void print_binary_byte(char num) {
 
 	//no ascii number is bigger than 127
@@ -86,21 +88,27 @@ void print_binary_byte(char num) {
 
 int main() {
 	
-	char str[11];
+	//string length = MAX
+	char str[MAX];
 	
-	puts("enter any values less than 10 chars (no white space)");
+	puts("enter any ascii chars");
 
-	scanf("%10s", str);
+	fgets(str, MAX, stdin);
 
 	int i;
 
-	for (i = 0; i < 11; i++) {
+	for (i = 0; i < MAX; i++) {
 
+		//null byte found (end of string)
+		if (str[i] == 0) {
+			break;
+		}
+		
 		print_binary_byte(str[i]);
 		printf(" ");
 	}
 	
-	printf("\n");
+	printf("\n(note byte is always a newline)\n");
 	
 	return 0;
 }
