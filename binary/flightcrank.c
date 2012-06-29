@@ -99,8 +99,11 @@ int main() {
 
 	for (i = 0; i < MAX; i++) {
 
-		//null byte found (end of string)
-		if (str[i] == 0) {
+		//peek at the next char value in the string
+		//if its a null byte were at the end of the string
+		//so exit loop early. fgets keeps the newline char.
+		//so the current value must be newline, skip that too.
+		if (str[i + 1] == 0) {
 			break;
 		}
 		
@@ -108,7 +111,7 @@ int main() {
 		printf(" ");
 	}
 	
-	printf("\n(note byte is always a newline)\n");
+	printf("\n(note the last byte is always a newline value)\n");
 	
 	return 0;
 }
