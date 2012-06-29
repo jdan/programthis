@@ -111,7 +111,7 @@ int main() {
 		printf(" ");
 	}
 	
-	printf("\n(note the last byte is always a newline value)\n");
+	printf("\n");
 	
 	return 0;
 }
