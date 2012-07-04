@@ -26,7 +26,8 @@ int main() {
 		printf("error opening file. does pt.txt exist ?");
 		return 1; // exit porgram
 	}
-
+	
+	//loop throught each char in the file.
 	do {
 		current = fgetc(fp);
 		

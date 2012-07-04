@@ -35,6 +35,20 @@ int max_word_length(char *str, char delim) {
 	return max_count;
 }
 
+void table_end_caps(int max) {
+	
+	int i;
+
+	printf("+");
+
+	for (i = 0; i < max + 2; i++) {// the 2 compinstes for the spaces added "+" and "+"
+		
+		printf("-");
+	}
+
+	puts("+");
+}
+
 void print_table(char *title, char *str, char delim) {
 
 	unsigned int list_num = strlen(str);
@@ -44,11 +58,13 @@ void print_table(char *title, char *str, char delim) {
 	int count = 0;
 	int i;
 
-	//replace the newline that fgets records with a null byte
+	//replace the '\n' that fgets records with a null byte, so printf will print it without the '\n' that was there
 	title[title_num -1] = 0;
 	//update the title_num to refelct the above change
 	title_num--;
 
+	//determine the correct width of the table seeing what has the longest word
+	//the title or a word in the list
 	if (title_num < longest_word) {
 		
 		max = longest_word;
@@ -58,17 +74,8 @@ void print_table(char *title, char *str, char delim) {
 		max = title_num;	
 	}
 
-	printf("length of biggest word in list %d\n",max);
-
 	//heading top
-	printf("+");
-
-	for (i = 0; i < max + 2; i++) {// the 2 compinstes for the spaces added "| " and " |"
-		
-		printf("-");
-	}
-
-	puts("+");
+	table_end_caps(max);
 
 	//heading title
 	printf("| %s",title);
@@ -79,29 +86,23 @@ void print_table(char *title, char *str, char delim) {
 	}
 
 	puts(" |");
+
 	//heading bottom
-	printf("+");
-
-	for (i = 0; i < max + 2; i++) {
-		
-		printf("-");
-	}
-
-	puts("+");
+	table_end_caps(max);
 
 	//data
 	printf("| ");
 
-	//loops theough all chars in the enterd string
+	//loops through all chars in the entered string
 	for (i = 0; i < list_num; i++) {
 
 		//if we get to the delim char or the end of the string print out a newline
 		if (str[i] == delim || str[i] == '\n') {
 			
-			//the current word will test test testing yeah ha grandmahave the count var at its max value
-			//by this point because the delimiter has been reached
-			//figuer out the number of spaces to print to have the 
-			//right side line mach up to the longest word in the string
+			//the current word will have the count var at its max value
+			//by this point because the delimiter has been reached.
+			//so figure out the number of spaces to print to have the 
+			//right side line match up to the longest word in the string
 			if (count < max) { 
 				
 				int diff = max - count;
@@ -114,8 +115,7 @@ void print_table(char *title, char *str, char delim) {
 			}
 			
 			//now we can print the line and a newline char, and start the next line off.
-			
-			if (str[i] == '\n') {
+			if (str[i] == '\n') {//this is the last word in the list. just need a new line.
 			
 				printf(" |\n");
 
@@ -135,15 +135,8 @@ void print_table(char *title, char *str, char delim) {
 		count++;
 	}
 
-	//bottom
-	printf("+");
-
-	for (i = 0; i < max + 2; i++) {
-		
-		printf("-");
-	}
-
-	puts("+");
+	//data bottom
+	table_end_caps(max);
 }
 
 int main() {
