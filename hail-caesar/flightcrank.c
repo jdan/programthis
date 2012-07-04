@@ -37,7 +37,7 @@ int main() {
 		//lowercase ascii value
 		if (str[i] >= 97 && str[i] <= 122) {
 					
-			// ascii 'a' starts at value 97 so if the current ascii char is
+			//ascii 'a' starts at value 97 so if the current ascii char plus the shift amount is
 			//under 122 all we have to do is add the shift amount
 			if (str[i] + shift < 122) {
 				
