@@ -5,8 +5,8 @@
 #include <string.h>
 
 #define MAX_INPUT 101
-#define MAX_WORD 21
 
+//find the first occurance of a vowel in a string and retun its index
 int first_vowel(char *str) {
 	
 	int i;
@@ -17,23 +17,18 @@ int first_vowel(char *str) {
 		
 			case 'a':
 				
-		//		printf("a found at position %d\n",i);
 				return i;
 			case 'e':
 				
-		//		printf("e found at position %d\n",i);
 				return i;
 			case 'i':
 				
-		//		printf("i found at position %d\n",i);
 				return i;
 			case 'o':
 				
-		//		printf("o found at position %d\n",i);
 				return i;
 			case 'u':
 				
-		//		printf("u found at position %d\n",i);
 				return i;
 		}
 	}
@@ -43,15 +38,16 @@ int first_vowel(char *str) {
 
 int main() {
 
-	//char current_word[MAX_WORD];
 	char str[MAX_INPUT];
 	char *p;
 
 	puts("enter string");
 	fgets(str, MAX_INPUT, stdin);
-
+	
+	//sreach the input and break it up into words
 	p = strtok(str, " \n");
 	
+	//loop through all the words found
 	while(p != NULL) {
 
 		int len = strlen(p);
@@ -60,14 +56,17 @@ int main() {
 
 		index = first_vowel(p);
 		
+		//words that dont start with a vowel
 		if (index > 0) {
 		
+			//print chars from first vowel onwards
 			for (i = index; i < len; i++) {
 			
 				printf("%c", p[i]);
 	
 			}
 	
+			//add the first char to the first vowel
 			for (j = 0; j < index; j++) {
 			
 				printf("%c", p[j]);
@@ -75,17 +74,16 @@ int main() {
 			}
 	
 			printf("ay\n");
-
+		
+		//the word must start with a vowel
 		} else {
 		
 			printf("%sway\n",p);	
 		}
-
+		
+		//search next word in the input
 		p = strtok(NULL, " \n");
-
 	}
-
-
 
 	return 0;
 }
