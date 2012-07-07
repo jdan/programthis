@@ -2,10 +2,14 @@
 //Email: ocaumaxim@gmail.com
 
 #include <stdio.h>
+#include <string.h>
 
 #define MAX 7
 
-void print(char *segment) {
+//prints a single 7 segment LCD char to stdout then prints a new line!.
+//note: to print horizontaly across the screen you would need to make a ling horizontal grid
+//wide enough to fit the input sting
+void display(char *segment) {
 
 	int i,j;
 
@@ -13,17 +17,17 @@ void print(char *segment) {
 
 		for(j =0; j < MAX; j++) {
 
-			//top
+			//top segement
 			if (segment[0] != '0') {
 			
 				if (i == 0) {
 					
 					printf("#");
-					continue;
+					continue; 
 				} 				
 			}
 			
-			//top right
+			//top right segment
 			if (segment[1] != '0') {
 			
 				if (i > 0 && i < 3) {
@@ -36,7 +40,7 @@ void print(char *segment) {
 				}
 			}
 			
-			//topleft
+			//top left segment
 			if (segment[2] != '0') {
 			
 				if (i > 0 && i < 3) {
@@ -49,7 +53,7 @@ void print(char *segment) {
 				}
 			}
 
-			//middle
+			//middle segment
 			if (segment[3] != '0') {
 				
 				if (i == 3) {
@@ -59,7 +63,7 @@ void print(char *segment) {
 				}
 			}
 
-			//bottom right
+			//bottom right segment
 			if (segment[4] != '0') {
 			
 				if (i > 3 && i < 6) {
@@ -72,7 +76,7 @@ void print(char *segment) {
 				}
 			}
 
-			//bottomleft
+			//bottomleft segment
 			if (segment[5] != '0') {
 			
 				if (i > 3 && i < 6) {
@@ -85,7 +89,7 @@ void print(char *segment) {
 				}
 			}
 
-			//bottom
+			//bottom segment
 			if (segment[6] != '0') {
 			
 				if (i == MAX - 1) {
@@ -94,24 +98,40 @@ void print(char *segment) {
 					continue;
 				}
 			}
-		
+			
+			//prints a space in the void areas of the 7*7 grid
 			printf(" ");
 		}
-
+		
+		//prints a new line after each row in the grid
 		printf("\n");
 	}
 }
 
+
 int main() {
 
+	//each index represents number 0 through to 9
+	//each 1 represents a segment to draw 
+	//each 0 represents a segment not to draw
 	char *numbers[] = {"1110111", "0100100","1101011","1101101","0111100",
 			"1011101", "1011111","1100100","1111111","1111100"};
 
 	int i;
+	char input[101];
 
-	for (i = 0; i < 10; i++) {
+	//no error checking ONLY input numbers or ascii char > 48 otherwise it will segfault
+	puts("enter only numbers to display");
+	fgets(input, 101, stdin);
 
-		print(numbers[i]);
+	for (i = 0; i < strlen(input) - 1; i++) { // include the -1 other wize it will include the '\n' from fgets()
+	
+		//convert the string char eg '1' into the integer 1 to get the correct index in the numbers[] array
+		// '0' starts a ascii 48 so subtract 48 to obtain the corrent int value
+		int n = input[i] - 48;
+		
+		//print LCD number to stdout
+		display(numbers[n]);
 	}
 
 	return 0;
