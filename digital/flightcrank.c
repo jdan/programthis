@@ -4,25 +4,34 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX 7
 
-//prints a single 7 segment LCD char to stdout then prints a new line!.
-//note: to print horizontaly across the screen you would need to make a ling horizontal grid
-//wide enough to fit the input sting
-void display(char *segment) {
+//number of rows
+#define NUM_ROW 7
 
-	int i,j;
+//number of colums
+//each number is 7 chars wide, * 10 means a MAX of 10 chars can be printed,
+// and + another 10 for a 1 index thick space between printed chars
+#define NUM_COL 7 * 10 + 10 			
 
-	for (i = 0; i < MAX; i++) {
+char grid[NUM_ROW][NUM_COL];
 
-		for(j =0; j < MAX; j++) {
+//prints a single 7 segment LCD char to a 7 * 7 array segemnt.
+void display(char *segment, int col_index) {
+
+	int i;
+	int j = col_index;
+	int col_max = col_index + 7;
+
+	for (i = 0; i < NUM_ROW; i++) {
+
+		for(j = col_index; j < col_max; j++) {
 
 			//top segement
 			if (segment[0] != '0') {
 			
 				if (i == 0) {
 					
-					printf("#");
+					grid[i][j] = 'X';
 					continue; 
 				} 				
 			}
@@ -32,9 +41,9 @@ void display(char *segment) {
 			
 				if (i > 0 && i < 3) {
 				
-					if (j == 6) {
+					if (j ==  col_index + 6) {
 					
-						printf("#");
+						grid[i][j] = 'X';
 						continue;
 					}
 				}
@@ -45,9 +54,9 @@ void display(char *segment) {
 			
 				if (i > 0 && i < 3) {
 				
-					if (j == 0) {
+					if (j == col_index) {
 					
-						printf("#");
+						grid[i][j] = 'X';
 						continue;
 					}
 				}
@@ -58,7 +67,7 @@ void display(char *segment) {
 				
 				if (i == 3) {
 				
-					printf("#");
+					grid[i][j] = 'X';
 					continue;
 				}
 			}
@@ -68,9 +77,9 @@ void display(char *segment) {
 			
 				if (i > 3 && i < 6) {
 				
-					if (j == 6) {
+					if (j == col_index + 6) {
 					
-						printf("#");
+						grid[i][j] = 'X';
 						continue;
 					}
 				}
@@ -81,9 +90,9 @@ void display(char *segment) {
 			
 				if (i > 3 && i < 6) {
 				
-					if (j == 0) {
+					if (j == col_index) {
 					
-						printf("#");
+						grid[i][j] = 'X';
 						continue;
 					}
 				}
@@ -92,22 +101,42 @@ void display(char *segment) {
 			//bottom segment
 			if (segment[6] != '0') {
 			
-				if (i == MAX - 1) {
+				if (i == NUM_ROW - 1) {
 				
-					printf("#");
+					grid[i][j] = 'X';
 					continue;
 				}
 			}
 			
 			//prints a space in the void areas of the 7*7 grid
-			printf(" ");
+			grid[i][j] = ' ';
 		}
-		
-		//prints a new line after each row in the grid
-		printf("\n");
 	}
 }
 
+//simply prints each char in the array to stdout
+void print_lcd() {
+	
+	int i,j;
+
+	for (i = 0; i < NUM_ROW; i++) {
+		
+		for(j = 0; j < NUM_COL; j++) {
+			
+			
+			if (grid[i][j] == 0) {
+			
+				printf(" ");
+			
+			} else {
+			
+				printf("%c", grid[i][j]);
+			}
+		}
+	
+		printf("\n");
+	}
+}
 
 int main() {
 
@@ -118,11 +147,12 @@ int main() {
 			"1011101", "1011111","1100100","1111111","1111100"};
 
 	int i;
-	char input[101];
+	int col = 0;
+	char input[12];
 
 	//no error checking ONLY input numbers or ascii char > 48 otherwise it will segfault
 	puts("enter only numbers to display");
-	fgets(input, 101, stdin);
+	fgets(input, 12, stdin);
 
 	for (i = 0; i < strlen(input) - 1; i++) { // include the -1 other wize it will include the '\n' from fgets()
 	
@@ -131,8 +161,12 @@ int main() {
 		int n = input[i] - 48;
 		
 		//print LCD number to stdout
-		display(numbers[n]);
+		display(numbers[n],col);
+
+		col = col + NUM_ROW + 1;
 	}
 
+	print_lcd();
+	
 	return 0;
 }
