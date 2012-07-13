@@ -36,7 +36,7 @@ void fill_grid() {
 			
 			if (word_grid[i][j] == ' ') {
 				
-				word_grid[i][j] = rand() % 24 + 97;
+				word_grid[i][j] = rand() % 26 + 97;
 			}
 		}	
 	
