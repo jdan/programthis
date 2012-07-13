@@ -109,7 +109,7 @@ int word_fit_v(int x, int y, char word[], int len) {
 				count++;
 			}
 
-		//cant plase word there no empty space
+		//cant place word there no empty space
 		//or incompatible letter already in that space
 		} else {
 
@@ -120,7 +120,7 @@ int word_fit_v(int x, int y, char word[], int len) {
 	return 1;
 }
 			
-//see if word will fit properly in the grid horizontaly
+//see if word will fit properly in the grid horizontally
 int word_fit_h(int x, int y, char word[], int len) {
 
 	int i, j;
@@ -145,7 +145,7 @@ int word_fit_h(int x, int y, char word[], int len) {
 					count++;
 				}
 
-			//cant plase word there no empty space
+			//cant place word there no empty space
 			//or incompatible letter already in that space
 			} else {
 			
@@ -178,10 +178,10 @@ int main() {
 	if (fp == NULL) {
 	
 		printf("error opening file. does pt.txt exist ?");
-		return 1; // exit porgram
+		return 1; // exit program
 	}
 
-	//loop throught each line in the file.
+	//loop throughout each line in the file.
 	while (fgets(line, MAX - 1, fp) != NULL) {
 
 		int len;
@@ -196,14 +196,14 @@ int main() {
 		if (line[len - 1] == '\n') {
 			
 			line[len -1] = 0; //replace '\n' with null for better printing to stdout
-			len -= 2;//compinsate for original nullbyte and '\n'
+			len -= 2;//compensate for original nullbyte and '\n'
 
 		} else {
 			
 			len--;
 		}
 			
-		//attempt to ramdomly place word in the grid.
+		//attempt to randomly place word in the grid.
 		while (1) {
 		
 			r = random() % 2;
@@ -213,7 +213,7 @@ int main() {
 			//horizontal
 			if (r == 0) {	
 			
-				//will fit the the grid left to right
+				//will fit the grid left to right
 				if(len < GRID - rx) {
 				
 					if (word_fit_h(rx,ry,line,len) == 0) {
