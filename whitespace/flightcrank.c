@@ -29,8 +29,10 @@ int main () {
 
 		int i;
 
-		//search string in reverse
-		for (i = strlen(line); i >= 0; i--) {
+		//search string in reverse (skipping the null byte strlen includes in the length)
+		//when were @ index 0 we dont want to check index -1, out of bounds
+		//for condition will not be met at case i = 0
+		for (i = strlen(line) - 1; i > 0; i--) {
 		
 			//fgets seems to add a '\n' if there isnt one.
 			//so the last line will contain a '\n' aswell
@@ -42,8 +44,14 @@ int main () {
 				
 					line[i - 1] = '\n';
 					line[i] = 0;
+
+				} else {
+					//whitespace not found on the char to the left
+					//so none to remove, breakout of loop early
+					//to avoid looping strnlen() number of times
+					break;					
 				}
-			}	
+			}
 		}
 		
 		//print out line (or write/append to a file)
