@@ -36,7 +36,7 @@ void fill_grid() {
 			
 			if (word_grid[i][j] == ' ') {
 				
-				word_grid[i][j] = rand() % 24 + 97;
+				word_grid[i][j] = rand() % 26 + 97;
 			}
 		}	
 	
@@ -45,24 +45,22 @@ void fill_grid() {
 
 int place_word_h(int x, int y, char word[], int len) {
 
-	int i, j;
+	int i;
 	int count = 0;
 
 	//loop through each place in the word_grid
 	//and place each char of the word in one space
-	for (i = y; i < GRID; i++) {
+	for (i = x; i < GRID; i++) {
 		
-		for (j = x; j < GRID; j++) {
-			
-			word_grid[i][j] = word[count];
-			count++;
-			
-			//exit function with success
-			if (count > len) {
-				return 0;
-			}
+		word_grid[y][i] = word[count];
+		count++;
+		
+		//exit function with success
+		if (count > len) {
+			return 0;
 		}
 	}
+	
 
 	return 1;
 }
@@ -94,28 +92,29 @@ int word_fit_v(int x, int y, char word[], int len) {
 
 	int i;
 	int count = 0;
-
-	//loop through each place in the word_grid vertically
+	
 	for (i = y; i < GRID; i++) {
-		
+
+		//loop through each place in the word_grid vertically
 		if (word_grid[i][x] == ' ' || word_grid[i][x] == word[count]) {
 			
 			if (count == len) {
-				
+			
 				return 0;
-
+	
 			} else {
-
+			
 				count++;
 			}
-
+	
 		//cant place word there no empty space
 		//or incompatible letter already in that space
 		} else {
-
+	
 			return 1;
 		}
 	}
+	
 
 	return 1;
 }
@@ -123,36 +122,33 @@ int word_fit_v(int x, int y, char word[], int len) {
 //see if word will fit properly in the grid horizontally
 int word_fit_h(int x, int y, char word[], int len) {
 
-	int i, j;
+	int i;
 	int count = 0;
 
-	//loop through each place in the word_grid horizontally
-	for (i = y; i < GRID; i++) {
-		
-		for (j = x; j < GRID; j++) {
+	//loop through each place in the word_grid horizontally	
+	for (i = x; i < GRID; i++) {
 			
-			//if the space in the grid is empty
-			//or
-			//if it has the same letter already in it.
-			if(word_grid[i][j] == ' ' || word_grid[i][j] == word[count]) {
+		//if the space in the grid is empty
+		//or
+		//if it has the same letter already in it.
+		if(word_grid[y][i] == ' ' || word_grid[y][i] == word[count]) {
+			
+			if (count == len) {
 				
-				if (count == len) {
-					
-					return 0;
+				return 0;
 
-				} else {
-
-					count++;
-				}
-
-			//cant place word there no empty space
-			//or incompatible letter already in that space
 			} else {
 			
-				return 1;
+				count++;
 			}
+		//cant place word there no empty space
+		//or incompatible letter already in that space
+		} else {
+		
+			return 1;
 		}
 	}
+	
 
 	return 1;
 }
@@ -244,8 +240,10 @@ int main() {
 	//close file
 	fclose(fp);
 
-	//print_grid();//print out grid before the junk letters are printed
+	print_grid();//print out grid before the junk letters are printed
+	printf("\n");
 	fill_grid();
+	printf("\n");
 	print_grid();
 
 	return 0;
