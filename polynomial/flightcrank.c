@@ -43,5 +43,7 @@ int main() {
 	
 	printf("%d\n", f);
 
+	free(a);
+
 	return 0;
 }
