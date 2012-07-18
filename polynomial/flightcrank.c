@@ -15,7 +15,7 @@ int main() {
 	char *in;
 	int *a;
 
-	printf("Enter number sequence: ");
+	printf("Enter number sequence seperated by spaces: ");
 	fgets(str, MAX - 1, stdin);
 
 	a = (int*) malloc(50); // 50 ints, only need 50 or so because the input string is 100 chars
