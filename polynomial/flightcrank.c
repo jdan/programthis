@@ -2,6 +2,7 @@
 //Email: ocaumaxim@gmail.com
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <math.h>
 
@@ -10,27 +11,39 @@
 int main() {
 	
 	char str[MAX];
-	int i,p,x;
+	int count,n;
+	char *in;
+	int *a;
 
-	printf("Enter number sequence: ");
+	printf("Enter number sequence seperated by spaces: ");
 	fgets(str, MAX - 1, stdin);
 
-	p = strlen(str) - 3;
-	printf("p = %d\n", p);
+	a = (int*) malloc(50); // 50 ints, only need 50 or so because the input string is 100 chars
+	count = 0;
+	in = strtok(str," \n");	
 
-	x = str[p + 1] - 48;
-	printf("x = %d\n", x);
-
-	int a = 0;
-	// -1 to skip the newline
-	for(i = 0; i < strlen(str) - 2; i++) {
-		
-		double r = pow((double) x, (double) p);
-		a += (str[i] - 48) * r;
-		p--;	
+	while (in != NULL) {
+	
+		sscanf(in,"%d",&n);
+		a[count] = n;
+		in = strtok(NULL, " \n");	
+		count++;
 	}
 	
-	printf("%d\n", a);
+	int p = count - 2; //power
+	int f = 0; // final result
+	int i;
+
+	for(i = 0; i < count - 1; i++) {
+		
+		double r = pow((double) a[count - 1], (double) p);
+		f += a[i] * r;
+		p--;
+	}
+	
+	printf("%d\n", f);
+
+	free(a);
 
 	return 0;
 }
